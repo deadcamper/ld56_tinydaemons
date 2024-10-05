@@ -1,0 +1,2 @@
+Borrowed code from here:
+https://discussions.unity.com/t/interaction-with-objects-displayed-on-render-texture/691499/2
