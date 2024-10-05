@@ -153,12 +153,11 @@ MonoBehaviour:
   RotateSpeed: 90
   OnIdle:
   - {fileID: -6413093103160641786, guid: 92604a617d1ba7247903610cc6752e5b, type: 3}
-  - {fileID: -3321762381174704686, guid: 174852496d5bff84f980abd1c37895ba, type: 3}
-  OnPatrol:
+  - {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
   - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
   - {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
   - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
-  - {fileID: -8720406612950830258, guid: 1ede07b840a9e7949ad4d2acbb16c74b, type: 3}
+  OnPatrol: []
   OnFoundEnemy: []
   OnSeeEnemy: []
   OnCloseToEnemy: []

@@ -29,6 +29,7 @@ public class SelectionCircle : MonoBehaviour
     public void DeSelect()
     {
         stateStack.Remove(SelectionState.Selected);
+        stateStack.Remove(SelectionState.Hovered); // Hack : deselect also unhovers because it's mildly confusing for end user to see both
         UpdateBasedOnState();
     }
 

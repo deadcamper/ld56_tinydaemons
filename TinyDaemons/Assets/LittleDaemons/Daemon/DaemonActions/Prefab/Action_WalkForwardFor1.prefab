@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4849645369145237180}
   - component: {fileID: -6275822870012875990}
   m_Layer: 0
-  m_Name: Action_WalkForwardFor5
+  m_Name: Action_WalkForwardFor1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f04372ca1ed4474d8efca282ff041f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TextName: Walk for 1 second
   stopAnimation: Idle
   walkAnimation: Walk
-  maximumTime: 5
+  maximumTime: 1

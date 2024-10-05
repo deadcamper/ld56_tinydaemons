@@ -3,6 +3,8 @@ using UnityEngine;
 
 public abstract class DaemonAction : MonoBehaviour
 {
+    public string TextName; // Used for presentation
+
     [SerializeField]
     public bool IsPerforming { get; private set; }
 

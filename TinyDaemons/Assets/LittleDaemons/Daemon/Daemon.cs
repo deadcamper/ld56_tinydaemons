@@ -7,9 +7,13 @@ using UnityEngine.Serialization;
 [DisallowMultipleComponent]
 public class Daemon : MonoBehaviour
 {
-    public SelectionCircle selectionCircle;
-    public DaemonBody body;
-    //public Animator animator;
+
+    #region Internals, Set up in unity
+    [SerializeField]
+    internal SelectionCircle selectionCircle;
+    [SerializeField]
+    internal DaemonBody body;
+    #endregion
 
     #region Stats
     public int Health = 60;
@@ -18,7 +22,11 @@ public class Daemon : MonoBehaviour
     #endregion
 
     #region Internal State
-    private Daemon Enemy;
+    private DaemonGame game;
+    private Daemon enemy;
+    #endregion
+
+    #region Publicly Visible State;
     #endregion
 
     // TODO EnemyTypes
@@ -27,9 +35,6 @@ public class Daemon : MonoBehaviour
 
     #region Actions
     public List<DaemonAction> OnIdle;
-
-    [FormerlySerializedAs("OnWalk")]
-    public List<DaemonAction> OnPatrol;
 
     public List<DaemonAction> OnFoundEnemy;
 
@@ -49,7 +54,7 @@ public class Daemon : MonoBehaviour
     public enum DaemonState
     {
         Idle,
-        Patrolling,
+        // Patrolling, no need. Idle covers a patrol
         Hunting,
         Attacking,
         HandleCollision,
@@ -79,6 +84,8 @@ public class Daemon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        game = FindObjectOfType<DaemonGame>();
+
         KickTheStateMachine();
     }
 
@@ -124,15 +131,10 @@ public class Daemon : MonoBehaviour
                 }
             }
 
-            if (DaemonState.Patrolling == activeState)
-            {
-                yield return DoListOfActions(OnPatrol);
-                // Will loop forever
-            }
             else if (DaemonState.Idle == activeState)
             {
                 yield return DoListOfActions(OnIdle);
-                // Will loop forever
+                // Will loop forever, waiting for interrupts
             }
             else
             {
@@ -159,7 +161,7 @@ public class Daemon : MonoBehaviour
         switch (interruptState)
         {
             case InterruptState.CollidedWithWall:
-                IsValidInterrupt = (activeState == DaemonState.Patrolling || activeState == DaemonState.Hunting);
+                IsValidInterrupt = (activeState == DaemonState.Hunting);
                 newDaemonState = DaemonState.HandleCollision;
                 break;
         }
@@ -210,6 +212,10 @@ public class Daemon : MonoBehaviour
 
     }
 
+    private void OnMouseUpAsButton()
+    {
+        game.SelectDaemon(this);
+    }
 
     private void OnMouseEnter()
     {

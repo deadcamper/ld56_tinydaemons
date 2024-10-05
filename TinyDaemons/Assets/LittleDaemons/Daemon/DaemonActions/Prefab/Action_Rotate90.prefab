@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15afa0fc5f1f82f4caa630d60335e7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  random: 1
+  TextName: Rotate 90 degrees
+  random: 0
   rotationAnimation: Idle
   rotation: 90
+  rotationMinimum: 0
