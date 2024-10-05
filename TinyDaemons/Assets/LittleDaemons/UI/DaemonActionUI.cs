@@ -15,25 +15,15 @@ public class DaemonActionUI : MonoBehaviour
         text.text = daemonAction.TextName;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void SetPerforming(bool IsPerforming)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (action != null)
+        if (IsPerforming)
         {
-            if (action.IsPerforming)
-            {
-                button.image.color = Color.yellow;
-            }
-            else
-            {
-                button.image.color = Color.gray;
-            }
+            button.image.color = Color.yellow;
+        }
+        else
+        {
+            button.image.color = Color.gray;
         }
     }
 }

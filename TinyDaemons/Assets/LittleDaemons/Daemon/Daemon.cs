@@ -34,7 +34,8 @@ public class Daemon : MonoBehaviour
     // TODO AllyTypes
 
     #region Actions
-    public List<DaemonAction> OnIdle;
+    [FormerlySerializedAs("OnIdle2")]
+    public DaemonActionList OnIdle;
 
     public List<DaemonAction> OnFoundEnemy;
 
@@ -133,7 +134,7 @@ public class Daemon : MonoBehaviour
 
             else if (DaemonState.Idle == activeState)
             {
-                yield return DoListOfActions(OnIdle);
+                yield return OnIdle.DoListOfActions(this);
                 // Will loop forever, waiting for interrupts
             }
             else

@@ -23,6 +23,7 @@ public class DaemonEditorUI : MonoBehaviour
             if (nextDaemon == null)
             {
                 // TODO Clear or gray out?
+                testListUI.Clean();
             }
             else
             {
@@ -30,7 +31,7 @@ public class DaemonEditorUI : MonoBehaviour
                 testListUI.Populate(nextDaemon.OnIdle);
             }
 
-            lastDaemon = game.selectedDaemon;
+            lastDaemon = nextDaemon;
         }
     }
 }
