@@ -187,6 +187,21 @@ public class Daemon : MonoBehaviour
                 }
             }
 
+            else if (DaemonState.Hunting == activeState)
+            {
+                if (!enemy || enemy.Health <= 0)
+                {
+                    enemy = null;
+                    activeState = DaemonState.Idle;
+                    continue;
+                }
+                yield return OnHuntingEnemy.DoListOfActions(this);
+            }
+            else if (DaemonState.Idle == activeState && enemy && enemy.Health > 0)
+            {
+                activeState = DaemonState.Hunting;
+                continue;
+            }
             else if (DaemonState.Idle == activeState)
             {
                 yield return OnIdle.DoListOfActions(this);

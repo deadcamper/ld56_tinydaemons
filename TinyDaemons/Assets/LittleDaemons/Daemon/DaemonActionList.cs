@@ -34,7 +34,10 @@ public class DaemonActionList
     {
         isPerforming = true;
         performingActionIndex = 0;
-        foreach (DaemonAction action in actions)
+
+        List<DaemonAction> tempList = new List<DaemonAction>(actions);
+
+        foreach (DaemonAction action in tempList)
         {
             yield return action.PerformAction(parentDaemon);
             performingActionIndex++;

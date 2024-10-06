@@ -148,7 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionCircle: {fileID: 2561278314645936295}
   body: {fileID: 0}
+  Name: 
   Health: 60
+  TotalHealth: 60
   WalkSpeed: 2
   RotateSpeed: 90
   daemonType: 0
@@ -163,7 +165,8 @@ MonoBehaviour:
     - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
   OnHuntingEnemy:
     title: Hunt Enemy
-    actions: []
+    actions:
+    - {fileID: -4048101259246730823, guid: 1615da9451720e04fa790577b7553240, type: 3}
   OnAttack:
     title: Attack
     actions: []

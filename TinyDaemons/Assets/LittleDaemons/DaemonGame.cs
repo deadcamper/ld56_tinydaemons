@@ -6,8 +6,13 @@ using UnityEngine;
 public class DaemonGame : MonoBehaviour
 {
     public Material defaultHover;
+    public DaemonInventory inventory;
+
+    public DaemonInventory itemStore;
 
     public Daemon selectedDaemon { get; private set; }
+
+    public DaemonActionList selectedList { get; private set; }
 
 
     private static DaemonGame _singleton;
@@ -19,18 +24,6 @@ public class DaemonGame : MonoBehaviour
         }
 
         return _singleton;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SelectDaemon(Daemon daemon)
@@ -52,6 +45,21 @@ public class DaemonGame : MonoBehaviour
 
     public void OnPickupGib()
     {
+        DaemonItem item = itemStore.RandomItem();
+        if (item)
+        {
+            GainItem(item);
+        }
+    }
 
+    public bool GainItem(DaemonItem item)
+    {
+        if (inventory.AtMaxCapacity())
+        {
+            return false;
+        }
+
+        inventory.items.Add(item);
+        return true;
     }
 }

@@ -29,6 +29,11 @@ public class DaemonActionListUI : MonoBehaviour
 
         titleBackplate.color = list.IsPerforming() ? performingColor : notPerformingColor;
 
+        if (actionUIs.Count != list.actions.Count)
+        {
+            Populate(list, true);
+        }
+
         for (int i = 0; i < actionUIs.Count; i++)
         {
             actionUIs[i].SetPerforming(list.GetPerformingIndex() == i);
@@ -42,9 +47,9 @@ public class DaemonActionListUI : MonoBehaviour
         actionUIs.Clear();
     }
 
-    public void Populate(DaemonActionList actionlist)
+    public void Populate(DaemonActionList actionlist, bool force = false)
     {
-        if (list == actionlist)
+        if (!force && list == actionlist)
             return;
 
         Clean();
@@ -57,7 +62,7 @@ public class DaemonActionListUI : MonoBehaviour
         {
             DaemonActionUI newAct = GameObject.Instantiate(templateAction, templateAction.transform.parent);
             newAct.gameObject.SetActive(true);
-            newAct.SetUp(act);
+            newAct.SetUp(actionlist, act);
 
             actionUIs.Add(newAct);
         }
