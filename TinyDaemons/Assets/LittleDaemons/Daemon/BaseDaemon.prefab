@@ -151,13 +151,7 @@ MonoBehaviour:
   Health: 60
   WalkSpeed: 2
   RotateSpeed: 90
-  OnIdle_old:
-  - {fileID: -6413093103160641786, guid: 92604a617d1ba7247903610cc6752e5b, type: 3}
-  - {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
-  - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
-  - {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
-  - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
-  OnIdle2:
+  OnIdle:
     title: On Idle
     actions:
     - {fileID: -6413093103160641786, guid: 92604a617d1ba7247903610cc6752e5b, type: 3}
@@ -171,9 +165,12 @@ MonoBehaviour:
   OnAttack: []
   OnAttackMelee: []
   OnCollision:
-  - {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
-  - {fileID: -3321762381174704686, guid: 174852496d5bff84f980abd1c37895ba, type: 3}
-  OnDie: []
+    title: 
+    actions: []
+  OnDie:
+    title: On Death
+    actions:
+    - {fileID: -8550268869023080706, guid: 878216fc8b155b34f83572d04adad10a, type: 3}
   activeState: 0
 --- !u!65 &1688734683583649008
 BoxCollider:

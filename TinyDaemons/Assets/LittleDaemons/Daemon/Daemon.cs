@@ -47,9 +47,10 @@ public class Daemon : MonoBehaviour
 
     public List<DaemonAction> OnAttackMelee;
 
-    public List<DaemonAction> OnCollision;
+    [FormerlySerializedAs("OnCollision2")]
+    public DaemonActionList OnCollision;
 
-    public List<DaemonAction> OnDie;
+    public DaemonActionList OnDie;
     #endregion
 
     public enum DaemonState
@@ -90,6 +91,12 @@ public class Daemon : MonoBehaviour
         KickTheStateMachine();
     }
 
+    public void Hurt(int hitpoints)
+    {
+        Health -= hitpoints;
+        Interrupt(InterruptState.CollidedWithHurt);
+    }
+
     private void KickTheStateMachine()
     {
         if (activeStateMachine != null)
@@ -113,7 +120,7 @@ public class Daemon : MonoBehaviour
 
             if (Health <= 0)
             {
-                yield return DoListOfActions(OnDie);
+                yield return OnDie.DoListOfActions(this);
                 activeState = DaemonState.Dead;
                 continue;
             }
@@ -125,7 +132,7 @@ public class Daemon : MonoBehaviour
             // TODO Collision Handling bits
             if (DaemonState.HandleCollision == activeState)
             {
-                yield return DoListOfActions(OnCollision);
+                yield return OnCollision.DoListOfActions(this);
                 if (DaemonState.HandleCollision == activeState)
                 {
                     activeState = DaemonState.Idle;
@@ -145,14 +152,6 @@ public class Daemon : MonoBehaviour
         }
 
         // TODO Explode into bits.
-    }
-
-    IEnumerator DoListOfActions(List<DaemonAction> actions)
-    {
-        foreach (DaemonAction action in actions)
-        {
-            yield return action.PerformAction(this);
-        }
     }
 
     private void Interrupt(InterruptState interruptState)

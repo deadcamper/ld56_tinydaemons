@@ -5,7 +5,21 @@ using UnityEngine;
 /// </summary>
 public class DaemonGame : MonoBehaviour
 {
-    public Daemon selectedDaemon;
+    public Material defaultHover;
+
+    public Daemon selectedDaemon { get; private set; }
+
+
+    private static DaemonGame _singleton;
+    public static DaemonGame GetInstance()
+    {
+        if (!_singleton)
+        {
+            _singleton = FindObjectOfType<DaemonGame>();
+        }
+
+        return _singleton;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,5 +48,10 @@ public class DaemonGame : MonoBehaviour
 
         daemon.selectionCircle.Select();
         selectedDaemon = daemon;
+    }
+
+    public void OnPickupGib()
+    {
+
     }
 }
