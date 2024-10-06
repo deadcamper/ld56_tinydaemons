@@ -24,9 +24,14 @@ public class Daemon : MonoBehaviour
     #region Internal State
     private DaemonGame game;
     private Daemon enemy;
+
+    internal Collider lastBumped;
+    internal Vector3 lastBumpedImpulse;
+
     #endregion
 
     #region Publicly Visible State;
+    public DaemonType daemonType;
     #endregion
 
     // TODO EnemyTypes
@@ -37,15 +42,15 @@ public class Daemon : MonoBehaviour
     [FormerlySerializedAs("OnIdle2")]
     public DaemonActionList OnIdle;
 
-    public List<DaemonAction> OnFoundEnemy;
+    public DaemonActionList OnFoundEnemy;
 
-    public List<DaemonAction> OnSeeEnemy;
+    public DaemonActionList OnHuntingEnemy;
 
-    public List<DaemonAction> OnCloseToEnemy;
+    public DaemonActionList OnCloseToEnemy;
 
-    public List<DaemonAction> OnAttack;
+    public DaemonActionList OnAttack;
 
-    public List<DaemonAction> OnAttackMelee;
+    public DaemonActionList OnAttackMelee;
 
     [FormerlySerializedAs("OnCollision2")]
     public DaemonActionList OnCollision;
@@ -65,6 +70,15 @@ public class Daemon : MonoBehaviour
 
         // DEADBEEF
         Dead
+    }
+
+    public enum DaemonType
+    {
+        None,
+        Player,
+        Imp,
+        Demon,
+        Zombie
     }
 
     public enum InterruptState
@@ -161,7 +175,11 @@ public class Daemon : MonoBehaviour
         switch (interruptState)
         {
             case InterruptState.CollidedWithWall:
-                IsValidInterrupt = (activeState == DaemonState.Hunting);
+                IsValidInterrupt = true; //(activeState == DaemonState.Hunting);
+                newDaemonState = DaemonState.HandleCollision;
+                break;
+            case InterruptState.CollidedWithDaemon:
+                IsValidInterrupt = true; //(activeState == DaemonState.Hunting);
                 newDaemonState = DaemonState.HandleCollision;
                 break;
         }
@@ -190,24 +208,24 @@ public class Daemon : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Wall")
+        if (collision.collider.tag == "Wall" || collision.collider.tag == "Daemon")
         {
-            Vector3 knockBack = Vector3.Normalize(collision.impulse) * 0.5f;
+            lastBumped = collision.collider;
+            lastBumpedImpulse = collision.impulse;
 
-            GetComponent<Rigidbody>().AddForce(knockBack, ForceMode.Impulse);
-            
-            Debug.Log("Bumped into wall.");
-            Interrupt(InterruptState.CollidedWithWall);
-        }
+            Debug.Log($"Bumped into {collision.collider.tag}.");
 
-        if (collision.collider.tag == "Daemon")
-        {
-            Vector3 knockBack = Vector3.Normalize(collision.impulse) * 0.7f;
+            switch (collision.collider.tag)
+            {
+                case "Wall":
+                    Interrupt(InterruptState.CollidedWithWall);
+                    break;
+                case "Daemon":
+                    Interrupt(InterruptState.CollidedWithDaemon);
+                    break;
 
-            GetComponent<Rigidbody>().AddForce(knockBack, ForceMode.Impulse);
-
-            Debug.Log("Bumped into Daemon.");
-            Interrupt(InterruptState.CollidedWithWall);
+                // TODO Enemy is different?
+            }
         }
 
     }

@@ -151,6 +151,7 @@ MonoBehaviour:
   Health: 60
   WalkSpeed: 2
   RotateSpeed: 90
+  daemonType: 0
   OnIdle:
     title: On Idle
     actions:
@@ -159,14 +160,25 @@ MonoBehaviour:
     - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
     - {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
     - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
-  OnFoundEnemy: []
-  OnSeeEnemy: []
-  OnCloseToEnemy: []
-  OnAttack: []
-  OnAttackMelee: []
-  OnCollision:
+  OnFoundEnemy:
     title: 
     actions: []
+  OnHuntingEnemy:
+    title: 
+    actions: []
+  OnCloseToEnemy:
+    title: 
+    actions: []
+  OnAttack:
+    title: 
+    actions: []
+  OnAttackMelee:
+    title: 
+    actions: []
+  OnCollision:
+    title: On Collision
+    actions:
+    - {fileID: -2942656646382450845, guid: 1a03fc306d4b09e40ad14d4aa5631ae3, type: 3}
   OnDie:
     title: On Death
     actions:
