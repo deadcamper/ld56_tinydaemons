@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class DaemonEditorUI : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class DaemonEditorUI : MonoBehaviour
 
     public GameObject killSwitch;
 
+    public GameObject listOfListsUI;
     public DaemonActionListUI templateListUI;
 
     private DaemonGame game;
@@ -37,6 +39,12 @@ public class DaemonEditorUI : MonoBehaviour
             Populate(nextDaemon);
 
             lastDaemon = nextDaemon;
+        }
+
+        if (!lastDaemon && !object.ReferenceEquals(lastDaemon, null))
+        {
+            lastDaemon = null;
+            Populate(null);
         }
 
         UpdateForChanges();
@@ -83,5 +91,7 @@ public class DaemonEditorUI : MonoBehaviour
         {
             targetPlate.text = $"Target: {lastDaemon.enemy.Name}";
         }
+
+        listOfListsUI.gameObject.SetActive(lastDaemon != null);
     }
 }

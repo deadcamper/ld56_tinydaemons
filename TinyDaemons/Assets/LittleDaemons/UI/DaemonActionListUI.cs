@@ -9,16 +9,24 @@ public class DaemonActionListUI : MonoBehaviour
     public TextMeshProUGUI titleField;
     public DaemonActionUI templateAction;
 
+    public Button addFromInventory;
+
+    public Color shoppingColor = Color.green;
     public Color performingColor = Color.yellow;
     public Color notPerformingColor = Color.gray;
 
     private DaemonActionList list;
     private List<DaemonActionUI> actionUIs = new List<DaemonActionUI>();
 
+    private DaemonGame game;
+
     // Start is called before the first frame update
     void Start()
     {
         templateAction.gameObject.SetActive(false);
+        game = DaemonGame.GetInstance();
+
+        addFromInventory.onClick.AddListener(PrimeToAddFromInventory);
     }
 
     // Update is called once per frame
@@ -27,7 +35,8 @@ public class DaemonActionListUI : MonoBehaviour
         if (list == null)
             return;
 
-        titleBackplate.color = list.IsPerforming() ? performingColor : notPerformingColor;
+        titleBackplate.color = (game.selectedListForInventory == list) ? shoppingColor :
+            ( list.IsPerforming() ? performingColor : notPerformingColor);
 
         if (actionUIs.Count != list.actions.Count)
         {
@@ -65,6 +74,18 @@ public class DaemonActionListUI : MonoBehaviour
             newAct.SetUp(actionlist, act);
 
             actionUIs.Add(newAct);
+        }
+    }
+
+    private void PrimeToAddFromInventory()
+    {
+        if (game.selectedListForInventory == list)
+        {
+            game.selectedListForInventory = null;
+        }
+        else
+        {
+            game.selectedListForInventory = list;
         }
     }
 }

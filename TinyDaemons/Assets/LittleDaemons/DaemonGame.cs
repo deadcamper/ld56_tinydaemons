@@ -10,9 +10,10 @@ public class DaemonGame : MonoBehaviour
 
     public DaemonInventory itemStore;
 
+
     public Daemon selectedDaemon { get; private set; }
 
-    public DaemonActionList selectedList { get; private set; }
+    internal DaemonActionList selectedListForInventory;
 
 
     private static DaemonGame _singleton;
@@ -41,6 +42,14 @@ public class DaemonGame : MonoBehaviour
 
         daemon.selectionCircle.Select();
         selectedDaemon = daemon;
+    }
+
+    public void DeselectSelf(Daemon self)
+    {
+        if (self == selectedDaemon)
+        {
+            selectedDaemon = null;
+        }
     }
 
     public void OnPickupGib()

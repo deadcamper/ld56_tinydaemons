@@ -159,10 +159,9 @@ MonoBehaviour:
   OnIdle:
     title: Idle
     actions:
-    - {fileID: -6413093103160641786, guid: 92604a617d1ba7247903610cc6752e5b, type: 3}
-    - {fileID: -5264599584180289776, guid: a0d212c0b6a0c7a4686a75d31af97ed0, type: 3}
     - {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
     - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
+    - {fileID: -5264599584180289776, guid: a0d212c0b6a0c7a4686a75d31af97ed0, type: 3}
   OnHuntingEnemy:
     title: Hunt Enemy
     actions:

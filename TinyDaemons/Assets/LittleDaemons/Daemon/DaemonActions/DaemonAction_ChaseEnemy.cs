@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class DaemonAction_ChaseEnemy : DaemonAction
@@ -10,16 +11,6 @@ public class DaemonAction_ChaseEnemy : DaemonAction
 
     protected override IEnumerator InternalAction(Daemon parentDaemon)
     {
-        if (parentDaemon.enemy.Health <= 0)
-        {
-            parentDaemon.enemy = null;
-        }
-        if (parentDaemon.enemy == null)
-        {
-            Debug.LogError("DaemonChaseEnemy when Enemy is gone.");
-            yield break;
-        }
-
         float minWait = 0.25f;
         float timePassed = 0;
 
@@ -27,8 +18,19 @@ public class DaemonAction_ChaseEnemy : DaemonAction
         Rigidbody rbody = parentDaemon.GetComponent<Rigidbody>();
         aa.Play(walkAnimation);
 
+
         do
         {
+            if (parentDaemon.enemy.Health <= 0)
+            {
+                parentDaemon.enemy = null;
+            }
+            if (parentDaemon.enemy == null)
+            {
+                Debug.LogError("DaemonChaseEnemy when Enemy is gone.");
+                yield break;
+            }
+
             Vector3 enemyPos = parentDaemon.enemy.transform.position;
             Vector3 myPos = parentDaemon.transform.position;
             Vector3 dist = enemyPos - myPos;

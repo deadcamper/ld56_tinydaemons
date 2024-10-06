@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DaemonInventoryUI : MonoBehaviour
 {
+    public GameObject inventoryUI;
     public DaemonItemButton templateButton;
     private DaemonGame game;
 
@@ -22,6 +23,14 @@ public class DaemonInventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        inventoryUI.SetActive(game.selectedListForInventory != null);
+
+        if (game.selectedListForInventory == null)
+        {
+            // short-cut the inventory setup
+            return;
+        }
+
         if (lastInventoryCount != game.inventory.items.Count)
         {
             int newCount = game.inventory.items.Count;

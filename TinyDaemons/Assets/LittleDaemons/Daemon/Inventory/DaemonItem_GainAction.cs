@@ -6,7 +6,8 @@ public class DaemonItem_GainAction : DaemonItem
 
     public override void ApplyItem()
     {
-        throw new System.NotImplementedException();
+        DaemonGame game = DaemonGame.GetInstance();
+        game.selectedListForInventory.actions.Add(gainedAction);
     }
 
     public override Sprite GetSprite()

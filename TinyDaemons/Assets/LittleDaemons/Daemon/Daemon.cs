@@ -111,7 +111,7 @@ public class Daemon : MonoBehaviour
 
         Name = $"{daemonType} #{++_daemonCounter:00}";
 
-        game = FindObjectOfType<DaemonGame>();
+        game = DaemonGame.GetInstance();
 
         // Just slap it in there
         if (daemonType == DaemonType.None)
@@ -170,6 +170,7 @@ public class Daemon : MonoBehaviour
             {
                 yield return OnDie.DoListOfActions(this);
                 activeState = DaemonState.Dead;
+                game.DeselectSelf(this);
                 continue;
             }
 
