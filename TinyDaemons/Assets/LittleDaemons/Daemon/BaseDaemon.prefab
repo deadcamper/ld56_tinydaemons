@@ -155,33 +155,28 @@ MonoBehaviour:
   enemyTypes: 
   enemy: {fileID: 0}
   OnIdle:
-    title: On Idle
+    title: Idle
     actions:
     - {fileID: -6413093103160641786, guid: 92604a617d1ba7247903610cc6752e5b, type: 3}
     - {fileID: -5264599584180289776, guid: a0d212c0b6a0c7a4686a75d31af97ed0, type: 3}
     - {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
     - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
-    - {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
-    - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
-  OnFoundEnemy:
-    title: 
-    actions: []
   OnHuntingEnemy:
-    title: 
-    actions: []
-  OnCloseToEnemy:
-    title: 
+    title: Hunt Enemy
     actions: []
   OnAttack:
-    title: 
+    title: Attack
     actions: []
   OnAttackMelee:
     title: 
     actions: []
   OnCollision:
-    title: On Collision
+    title: Handle Collision
     actions:
     - {fileID: -2942656646382450845, guid: 1a03fc306d4b09e40ad14d4aa5631ae3, type: 3}
+  OnHurt:
+    title: On Hurt
+    actions: []
   OnDie:
     title: On Death
     actions:

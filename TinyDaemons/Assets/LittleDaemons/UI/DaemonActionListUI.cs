@@ -1,11 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DaemonActionListUI : MonoBehaviour
 {
+    public Image titleBackplate;
+    public TextMeshProUGUI titleField;
     public DaemonActionUI templateAction;
+
+    public Color performingColor = Color.yellow;
+    public Color notPerformingColor = Color.gray;
 
     private DaemonActionList list;
     private List<DaemonActionUI> actionUIs = new List<DaemonActionUI>();
@@ -19,8 +24,10 @@ public class DaemonActionListUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (list == null || actionUIs.Count == 0)
+        if (list == null)
             return;
+
+        titleBackplate.color = list.IsPerforming() ? performingColor : notPerformingColor;
 
         for (int i = 0; i < actionUIs.Count; i++)
         {
@@ -43,6 +50,8 @@ public class DaemonActionListUI : MonoBehaviour
         Clean();
 
         list = actionlist;
+
+        titleField.text = list.title;
 
         foreach (DaemonAction act in actionlist.actions)
         {

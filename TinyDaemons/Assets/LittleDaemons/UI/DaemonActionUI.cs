@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 public class DaemonActionUI : MonoBehaviour
 {
+    public Color performingColor = Color.yellow;
+    public Color notPerformingColor = Color.gray;
+
     public Button button;
     public TMPro.TextMeshProUGUI text;
 
@@ -19,11 +22,11 @@ public class DaemonActionUI : MonoBehaviour
     {
         if (IsPerforming)
         {
-            button.image.color = Color.yellow;
+            button.image.color = performingColor;
         }
         else
         {
-            button.image.color = Color.gray;
+            button.image.color = notPerformingColor;
         }
     }
 }

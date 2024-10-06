@@ -11,6 +11,16 @@ public class DaemonActionList
     private int performingActionIndex = -1;
     private bool isPerforming;
 
+    public bool IsPerforming()
+    {
+        return isPerforming;
+    }
+
+    public void NotPerforming()
+    {
+        isPerforming = false;
+    }
+
     public int GetPerformingIndex()
     {
         if (!isPerforming)

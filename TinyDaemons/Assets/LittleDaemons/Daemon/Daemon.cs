@@ -8,6 +8,8 @@ using UnityEngine.Serialization;
 public class Daemon : MonoBehaviour
 {
 
+    private static int _daemonCounter = 0;
+
     #region Internals, Set up in unity
     [SerializeField]
     internal SelectionCircle selectionCircle;
@@ -16,7 +18,9 @@ public class Daemon : MonoBehaviour
     #endregion
 
     #region Stats
+    public string Name;
     public int Health = 60;
+    public int TotalHealth = 60;
     public float WalkSpeed = 1;
     public float RotateSpeed = 15;
     #endregion
@@ -44,18 +48,17 @@ public class Daemon : MonoBehaviour
     [FormerlySerializedAs("OnIdle2")]
     public DaemonActionList OnIdle;
 
-    public DaemonActionList OnFoundEnemy;
-
     public DaemonActionList OnHuntingEnemy;
-
-    public DaemonActionList OnCloseToEnemy;
 
     public DaemonActionList OnAttack;
 
+    // TODO - Remove?
     public DaemonActionList OnAttackMelee;
 
     [FormerlySerializedAs("OnCollision2")]
     public DaemonActionList OnCollision;
+
+    public DaemonActionList OnHurt;
 
     public DaemonActionList OnDie;
     #endregion
@@ -90,7 +93,7 @@ public class Daemon : MonoBehaviour
         CollidedWithWall,
         CollidedWithDaemon,
         CollidedWithEnemy,
-        CollidedWithHurt,
+        CollidedWithHurt
     }
 
     private HashSet<InterruptState> unhandledInterrupts = new HashSet<InterruptState>();
@@ -102,6 +105,12 @@ public class Daemon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Hokey hack to give them full HP
+        TotalHealth = Mathf.Max(Health, TotalHealth);
+        Health = TotalHealth;
+
+        Name = $"{daemonType} #{++_daemonCounter:00}";
+
         game = FindObjectOfType<DaemonGame>();
 
         // Just slap it in there
@@ -132,6 +141,15 @@ public class Daemon : MonoBehaviour
 
     private void KickTheStateMachine()
     {
+        // Do clear-ups of machines
+        OnIdle.NotPerforming();
+        OnHuntingEnemy.NotPerforming();
+        OnAttack.NotPerforming();
+        OnAttackMelee.NotPerforming();
+        OnCollision.NotPerforming();
+        OnHurt.NotPerforming();
+        OnDie.NotPerforming();
+
         if (activeStateMachine != null)
         {
             StopCoroutine(activeStateMachine);
@@ -146,11 +164,8 @@ public class Daemon : MonoBehaviour
         while (true)
         {
             yield return new WaitForEndOfFrame();
-            if (activeState == DaemonState.Dead)
-            {
-                break;
-            }
 
+            // Definitely dead
             if (Health <= 0)
             {
                 yield return OnDie.DoListOfActions(this);
@@ -200,6 +215,10 @@ public class Daemon : MonoBehaviour
             case InterruptState.CollidedWithDaemon:
                 IsValidInterrupt = true; //(activeState == DaemonState.Hunting);
                 newDaemonState = DaemonState.HandleCollision;
+                break;
+            case InterruptState.CollidedWithHurt:
+                IsValidInterrupt = true;
+                newDaemonState = Health > 0 ? DaemonState.Hurt : DaemonState.Dead;
                 break;
         }
 
