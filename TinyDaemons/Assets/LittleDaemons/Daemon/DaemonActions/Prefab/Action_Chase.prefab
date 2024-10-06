@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd7b5bfc27526247a7712960eadb262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextName: Chase Enemy (1 Second)
+  TextName: Chase (1 Second)
   timeToChase: 1
   distanceToStop: 0.5
   walkAnimation: Walk

@@ -35,6 +35,8 @@ public class DaemonActionListUI : MonoBehaviour
         if (list == null)
             return;
 
+        addFromInventory.gameObject.SetActive(game.selectedItem);
+
         titleBackplate.color = (game.selectedListForInventory == list) ? shoppingColor :
             ( list.IsPerforming() ? performingColor : notPerformingColor);
 

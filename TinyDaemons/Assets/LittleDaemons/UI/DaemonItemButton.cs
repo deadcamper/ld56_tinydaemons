@@ -4,37 +4,78 @@ using UnityEngine.UI;
 
 public class DaemonItemButton : MonoBehaviour
 {
+    public Color selectedColor;
+    public Color deselectedColor;
+
     public Button button;
+    public Button trashButton;
+
     public TextMeshProUGUI title;
     public Image icon;
 
     public DaemonItem item;
 
+    private DaemonGame game;
+
     public void Start()
     {
-        button.onClick.AddListener(ApplyItem);
+        game = DaemonGame.GetInstance();
+        button.onClick.AddListener(SelectItem);
+        trashButton.onClick.AddListener(TossItemToTrash);
+    }
+
+    public void Update()
+    {
+        if (game.selectedItem && game.selectedItem == item)
+        {
+            button.image.color = selectedColor;
+            CheckForApplyItem();
+        }
+        else
+        {
+            button.image.color = deselectedColor;
+        }
     }
 
     public void SetUp(DaemonItem item)
     {
+        
         this.item = item;
 
         title.text = item.GetText();
         icon.sprite = item.GetSprite();
+
+        icon.enabled = ( icon.sprite != null );
     }
 
-    public void ApplyItem()
+    private void CheckForApplyItem()
     {
-        DaemonGame game = DaemonGame.GetInstance();
-
-        if (!game.inventory.items.Remove(item))
+        if (game.selectedItem && game.selectedItem == item)
         {
-            Debug.LogWarning("Tried to ApplyItem for an item that's not in the inventory.");
-            return;
+            if (game.selectedListForInventory != null)
+            {
+                if (!game.inventory.items.Remove(item))
+                {
+                    Debug.LogWarning("Tried to ApplyItem for an item that's not in the inventory.");
+                    return;
+                }
+
+                item.ApplyItem();
+
+                game.selectedListForInventory = null;
+                game.selectedItem = null;
+            }
         }
+    }
 
-        item.ApplyItem();
+    private void SelectItem()
+    {
+        game.selectedItem = item;
+    }
 
-        game.selectedListForInventory = null;
+    private void TossItemToTrash()
+    {
+        game.inventory.items.Remove(item);
+        Destroy(gameObject);
     }
 }

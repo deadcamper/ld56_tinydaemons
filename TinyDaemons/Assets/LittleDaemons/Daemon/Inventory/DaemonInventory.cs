@@ -4,8 +4,18 @@ using UnityEngine;
 public class DaemonInventory : MonoBehaviour
 {
     public int MaxCount = 4;
-
     public List<DaemonItem> items;
+
+    public bool AtMaxCapacity()
+    {
+        return items.Count >= MaxCount;
+    }
+
+    public void AddItem(DaemonItem prefab)
+    {
+        DaemonItem item = Instantiate(prefab);
+        items.Add(item);
+    }
 
     public DaemonItem RandomItem()
     {
@@ -14,5 +24,4 @@ public class DaemonInventory : MonoBehaviour
         return items[Random.Range(0, items.Count)];
     }
 
-    public bool AtMaxCapacity() { return items.Count >= MaxCount; }
 }

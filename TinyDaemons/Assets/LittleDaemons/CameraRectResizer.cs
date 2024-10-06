@@ -1,13 +1,17 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class CameraRectResizer : MonoBehaviour
 {
     public Camera cameraToRect;
 
-    public Image negativeOffset;
+    [FormerlySerializedAs("negativeOffset")]
+    public Image rightHandOffset;
 
-    public Rect lastWindowRect;
+    public Image bottomOffset;
+
+    private Rect lastWindowRect;
 
     private void Start()
     {
@@ -19,18 +23,18 @@ public class CameraRectResizer : MonoBehaviour
 
         if (newRect != lastWindowRect)
         {
-            Rect negativeSpace = negativeOffset.GetPixelAdjustedRect();
+            Rect negativeSpace = rightHandOffset.GetPixelAdjustedRect();
 
-            Vector3[] fourCornersArray = new Vector3[4];
-            negativeOffset.GetComponent<RectTransform>().GetWorldCorners(fourCornersArray);
+            Vector3[] fourCorners = new Vector3[4];
+            rightHandOffset.GetComponent<RectTransform>().GetWorldCorners(fourCorners);
 
-            Vector2 ul = fourCornersArray[0];
-            Vector2 size = fourCornersArray[2] - fourCornersArray[0];
+            Vector2 rightHand = fourCorners[0];
 
-            Rect negativeSpace2 = new Rect(ul, size);
+            bottomOffset.GetComponent<RectTransform>().GetWorldCorners(fourCorners);
+            Vector2 bottomHand = fourCorners[1];
 
             // HACK : only applies to right hand side
-            Rect cameraSpace = new Rect(0, 0, negativeSpace2.x, Screen.height);
+            Rect cameraSpace = new Rect(0, bottomHand.y, rightHand.x, Screen.height - bottomHand.y);
 
             cameraToRect.pixelRect = cameraSpace;
 

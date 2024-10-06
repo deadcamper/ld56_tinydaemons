@@ -10,10 +10,11 @@ public class DaemonGame : MonoBehaviour
 
     public DaemonInventory itemStore;
 
-
     public Daemon selectedDaemon { get; private set; }
 
     internal DaemonActionList selectedListForInventory;
+
+    internal DaemonItem selectedItem;
 
 
     private static DaemonGame _singleton;
@@ -54,21 +55,21 @@ public class DaemonGame : MonoBehaviour
 
     public void OnPickupGib()
     {
-        DaemonItem item = itemStore.RandomItem();
-        if (item)
+        DaemonItem prefab = itemStore.RandomItem();
+        if (prefab)
         {
-            GainItem(item);
+            GainItem(prefab);
         }
     }
 
-    public bool GainItem(DaemonItem item)
+    public bool GainItem(DaemonItem prefab)
     {
         if (inventory.AtMaxCapacity())
         {
             return false;
         }
 
-        inventory.items.Add(item);
+        inventory.AddItem(prefab);
         return true;
     }
 }
