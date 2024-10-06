@@ -17,12 +17,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2286121582776034554}
     - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: Health
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 8503303003012538149}
     - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: WalkSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
       propertyPath: daemonType
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: RotateSpeed
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
       propertyPath: OnPatrol.Array.data[1]

@@ -33,7 +33,7 @@ public class DaemonAction_BackAwayFromWall : DaemonAction
 
     private Vector3 EvalKnockback(Daemon parentDaemon, Collider bump, Vector3 impulse)
     {
-        if (bump.gameObject.tag == "Wall")
+        if (bump.gameObject.CompareTag("Wall"))
         {
             Vector3 knockBack = Vector3.Normalize(impulse);
             return knockBack;

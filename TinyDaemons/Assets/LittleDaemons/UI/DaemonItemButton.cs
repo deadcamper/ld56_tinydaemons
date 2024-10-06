@@ -70,7 +70,14 @@ public class DaemonItemButton : MonoBehaviour
 
     private void SelectItem()
     {
-        game.selectedItem = item;
+        if (game.selectedItem == item)
+        {
+            game.selectedItem = null;
+        }
+        else
+        {
+            game.selectedItem = item;
+        }
     }
 
     private void TossItemToTrash()
