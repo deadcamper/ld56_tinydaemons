@@ -21,6 +21,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8503303003012538149}
     - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: daemonType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
       propertyPath: OnPatrol.Array.data[1]
       value: 
       objectReference: {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}

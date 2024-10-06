@@ -98,6 +98,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 6831984149957383269}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: daemonType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9010324527898670575, guid: 82aefa372ebf498468915a3508210540, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

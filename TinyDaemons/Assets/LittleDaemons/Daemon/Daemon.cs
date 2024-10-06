@@ -23,7 +23,6 @@ public class Daemon : MonoBehaviour
 
     #region Internal State
     private DaemonGame game;
-    private Daemon enemy;
 
     internal Collider lastBumped;
     internal Vector3 lastBumpedImpulse;
@@ -32,6 +31,9 @@ public class Daemon : MonoBehaviour
 
     #region Publicly Visible State;
     public DaemonType daemonType;
+    public List<DaemonType> enemyTypes;
+
+    public Daemon enemy;
     #endregion
 
     // TODO EnemyTypes
@@ -102,6 +104,23 @@ public class Daemon : MonoBehaviour
     {
         game = FindObjectOfType<DaemonGame>();
 
+        // Just slap it in there
+        if (daemonType == DaemonType.None)
+        {
+            enemyTypes = new List<DaemonType>();
+        }
+        else if (daemonType != DaemonType.Player)
+        {
+            enemyTypes = new List<DaemonType> { DaemonType.Player };
+        }
+        else
+        {
+            enemyTypes = System.Enum.GetValues(typeof(DaemonType))
+                .Cast<DaemonType>()
+                .Where(dType => dType != DaemonType.Player && dType != DaemonType.None)
+                .ToList();
+        }
+
         KickTheStateMachine();
     }
 
@@ -168,7 +187,7 @@ public class Daemon : MonoBehaviour
         // TODO Explode into bits.
     }
 
-    private void Interrupt(InterruptState interruptState)
+    public void Interrupt(InterruptState interruptState)
     {
         bool IsValidInterrupt = false;
         DaemonState newDaemonState = DaemonState.Idle;
