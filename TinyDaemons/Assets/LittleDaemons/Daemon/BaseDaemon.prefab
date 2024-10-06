@@ -157,30 +157,44 @@ MonoBehaviour:
   enemyTypes: 
   enemy: {fileID: 0}
   OnIdle:
-    title: Idle
+    title: Patrol
+    isModifiable: 1
+    isVisible: 1
     actions:
     - {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
     - {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
     - {fileID: -5264599584180289776, guid: a0d212c0b6a0c7a4686a75d31af97ed0, type: 3}
   OnHuntingEnemy:
     title: Hunt Enemy
+    isModifiable: 1
+    isVisible: 1
     actions:
     - {fileID: -4048101259246730823, guid: 1615da9451720e04fa790577b7553240, type: 3}
   OnAttack:
     title: Attack
+    isModifiable: 1
+    isVisible: 1
     actions: []
   OnAttackMelee:
     title: 
+    isModifiable: 0
+    isVisible: 0
     actions: []
   OnCollision:
     title: Handle Collision
+    isModifiable: 0
+    isVisible: 1
     actions:
     - {fileID: -2942656646382450845, guid: 1a03fc306d4b09e40ad14d4aa5631ae3, type: 3}
   OnHurt:
     title: On Hurt
+    isModifiable: 0
+    isVisible: 1
     actions: []
   OnDie:
     title: On Death
+    isModifiable: 0
+    isVisible: 1
     actions:
     - {fileID: -8550268869023080706, guid: 878216fc8b155b34f83572d04adad10a, type: 3}
   activeState: 0

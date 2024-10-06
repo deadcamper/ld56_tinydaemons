@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.ProBuilder;
@@ -18,8 +19,6 @@ public class DaemonEditorUI : MonoBehaviour
     private Daemon lastDaemon;
 
     private List<DaemonActionListUI> activeListUIs = new List<DaemonActionListUI>();
-
-    private const int NUM_LISTS = 4;
 
     private void Start()
     {
@@ -52,30 +51,36 @@ public class DaemonEditorUI : MonoBehaviour
 
     private void Populate(Daemon nextDaemon)
     {
-        if (nextDaemon && activeListUIs.Count == 0)
+        if (nextDaemon)
         {
-            for(int i = 0; i < NUM_LISTS; i++)
+            List<DaemonActionList> listOfListData = nextDaemon.AllActions
+                .Where(act => act.isVisible)
+                .Where(act => act.isModifiable) // TODO - sort, not hide
+                .ToList();
+
+            while (activeListUIs.Count > listOfListData.Count)
+            {
+                Destroy(activeListUIs.Last());
+                activeListUIs.RemoveAt(activeListUIs.Count - 1);
+            }
+
+            while (activeListUIs.Count < listOfListData.Count)
             {
                 var listUI = Instantiate(templateListUI, templateListUI.transform.parent);
                 listUI.gameObject.SetActive(true);
                 activeListUIs.Add(listUI);
             }
-        }
 
-        if (nextDaemon == null)
-        {
-            activeListUIs.ForEach(listUI => listUI.Clean());
+            for(int n = 0; n < activeListUIs.Count; n++)
+            {
+                activeListUIs[n].Populate(listOfListData[n]);
+            }
         }
         else
         {
-            activeListUIs[0].Populate(nextDaemon.OnIdle);
-            activeListUIs[1].Populate(nextDaemon.OnHuntingEnemy);
-            activeListUIs[2].Populate(nextDaemon.OnAttack);
-            activeListUIs[3].Populate(nextDaemon.OnHurt);
+         //   activeListUIs.ForEach(listUI => listUI.Clean());
         }
-
-        namePlate.text = nextDaemon ? nextDaemon.Name : "Select a Daemon";
-        healthPlate.text = nextDaemon ? $"Health: {nextDaemon.Health}/{nextDaemon.TotalHealth}" : "";
+        
     }
 
     private void UpdateForChanges()
@@ -92,6 +97,9 @@ public class DaemonEditorUI : MonoBehaviour
             targetPlate.text = $"Target: {lastDaemon.enemy.Name}";
         }
 
+        // Regularly probed because of accessibility
         listOfListsUI.gameObject.SetActive(lastDaemon != null);
+        namePlate.text = lastDaemon ? lastDaemon.Name : "Select a Daemon";
+        healthPlate.text = lastDaemon ? $"Health: {lastDaemon.Health}/{lastDaemon.TotalHealth}" : "";
     }
 }

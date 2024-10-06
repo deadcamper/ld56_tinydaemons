@@ -61,6 +61,22 @@ public class Daemon : MonoBehaviour
     public DaemonActionList OnHurt;
 
     public DaemonActionList OnDie;
+
+    // Property to fetch all actions in one swoop
+    public DaemonActionList[] AllActions {
+        get
+        {
+            return new DaemonActionList[]{
+                OnIdle,
+                OnHuntingEnemy,
+                OnAttack,
+                OnAttackMelee,
+                OnCollision,
+                OnHurt,
+                OnDie
+            };
+        }
+    }
     #endregion
 
     public enum DaemonState

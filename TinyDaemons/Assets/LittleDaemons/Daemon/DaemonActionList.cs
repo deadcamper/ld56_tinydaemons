@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class DaemonActionList
 {
     public string title;
+    public bool isModifiable = true;
+    public bool isVisible = true;
     public List<DaemonAction> actions;
 
     private int performingActionIndex = -1;
