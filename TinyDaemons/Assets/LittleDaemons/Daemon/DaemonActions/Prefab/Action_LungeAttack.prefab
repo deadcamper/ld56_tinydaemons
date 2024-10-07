@@ -48,6 +48,6 @@ MonoBehaviour:
   attackAnimation: AttackLunge
   speedMultiplier: 3
   distToLunge: 4
-  radiusToDoDamage: 5
+  radiusToDoDamage: 7.5
   LungeDamage: 25
   LungeAwayFromDanger: 0
