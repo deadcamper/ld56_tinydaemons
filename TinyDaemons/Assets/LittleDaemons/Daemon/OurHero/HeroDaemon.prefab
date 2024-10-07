@@ -105,6 +105,34 @@ PrefabInstance:
       propertyPath: RotateSpeed
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: OnIdle.actions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: OnIdle.actions.Array.data[0]
+      value: 
+      objectReference: {fileID: -6413093103160641786, guid: 92604a617d1ba7247903610cc6752e5b, type: 3}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: OnIdle.actions.Array.data[1]
+      value: 
+      objectReference: {fileID: -5264599584180289776, guid: a0d212c0b6a0c7a4686a75d31af97ed0, type: 3}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: OnHuntingEnemy.actions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: OnHuntingEnemy.actions.Array.data[0]
+      value: 
+      objectReference: {fileID: -4146895062526136466, guid: ecb2c89bab9fc144abc7dc976c56e298, type: 3}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: OnHuntingEnemy.actions.Array.data[1]
+      value: 
+      objectReference: {fileID: 7419213373954833631, guid: 68ce5857c909d5647adf06c9711778b9, type: 3}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: OnHuntingEnemy.actions.Array.data[2]
+      value: 
+      objectReference: {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
     - target: {fileID: 9010324527898670575, guid: 82aefa372ebf498468915a3508210540, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

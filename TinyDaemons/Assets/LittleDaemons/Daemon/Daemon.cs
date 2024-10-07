@@ -31,6 +31,8 @@ public class Daemon : MonoBehaviour
     internal Collider lastBumped;
     internal Vector3 lastBumpedImpulse;
 
+    internal bool isMelee; // is delivering a melee attack
+
     #endregion
 
     #region Publicly Visible State;
@@ -239,7 +241,7 @@ public class Daemon : MonoBehaviour
         switch (interruptState)
         {
             case InterruptState.CollidedWithWall:
-                IsValidInterrupt = true; //(activeState == DaemonState.Hunting);
+                IsValidInterrupt = !isMelee; //(activeState == DaemonState.Hunting);
                 newDaemonState = DaemonState.HandleCollision;
                 break;
             case InterruptState.CollidedWithDaemon:

@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class DaemonAction_ChaseEnemy : DaemonAction
+public class DaemonAction_Flee : DaemonAction
 {
-    public float timeToChase = 1;
-    public float distanceToStop = 1;
+    public float timeToFlee = 1;
 
     public string walkAnimation = "Walk";
 
@@ -16,7 +15,6 @@ public class DaemonAction_ChaseEnemy : DaemonAction
         UnityEngine.Animator aa = parentDaemon.body.animator;
         Rigidbody rbody = parentDaemon.GetComponent<Rigidbody>();
         aa.Play(walkAnimation);
-
 
         do
         {
@@ -32,28 +30,11 @@ public class DaemonAction_ChaseEnemy : DaemonAction
 
             Vector3 enemyPos = parentDaemon.enemy.transform.position;
             Vector3 myPos = parentDaemon.transform.position;
-            Vector3 dist = enemyPos - myPos;
-
-            // Already close enough
-            if (dist.sqrMagnitude < distanceToStop * distanceToStop)
-            {
-                aa.Play("Idle");
-                rbody.velocity = Vector3.zero;
-                yield return new WaitForSeconds(Mathf.Max(0f, timePassed - minWait));
-                yield break;
-            }
+            Vector3 dist = myPos - enemyPos; // Run away, not toward
 
             Quaternion FromToRotation = Quaternion.FromToRotation(parentDaemon.body.transform.forward, dist);
 
             Vector3 euler = FromToRotation.eulerAngles;
-
-            /*
-            Quaternion lookDist = Quaternion.LookRotation(dist);
-            Quaternion myLook = parentDaemon.body.transform.rotation;
-
-            float degree = Quaternion.Angle(myLook, lookDist);
-            float dot = Quaternion.Dot(myLook.normalized, lookDist.normalized);
-            */
 
             float degree2 = euler.y;
 
@@ -74,8 +55,6 @@ public class DaemonAction_ChaseEnemy : DaemonAction
             yield return new WaitForEndOfFrame();
             timePassed += Time.deltaTime;
         }
-        while (timePassed < timeToChase);
-
-        Vector3 myEuler = parentDaemon.transform.rotation.eulerAngles;
+        while (timePassed < timeToFlee);
     }
 }
