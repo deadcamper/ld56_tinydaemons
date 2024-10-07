@@ -46,8 +46,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
       propertyPath: OnIdle.actions.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: OnIdle.actions.Array.data[0]
+      value: 
+      objectReference: {fileID: -6413093103160641786, guid: 92604a617d1ba7247903610cc6752e5b, type: 3}
     - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
       propertyPath: OnHuntingEnemy.actions.Array.size
       value: 0

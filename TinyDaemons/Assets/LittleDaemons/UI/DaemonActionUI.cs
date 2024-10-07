@@ -15,6 +15,13 @@ public class DaemonActionUI : MonoBehaviour
     private DaemonActionList actionList;
     private DaemonAction action;
 
+    private DaemonGame game;
+
+    public void Start()
+    {
+        game = DaemonGame.GetInstance();
+    }
+
     public void SetUp(DaemonActionList actionList, DaemonAction daemonAction)
     {
         this.actionList = actionList;
@@ -39,7 +46,7 @@ public class DaemonActionUI : MonoBehaviour
 
     public void PutInInventory()
     {
-        DaemonGame game = DaemonGame.GetInstance();
+        //DaemonGame game = DaemonGame.GetInstance();
         if (game.inventory.AtMaxCapacity())
         {
             // Do Nothing
@@ -57,5 +64,6 @@ public class DaemonActionUI : MonoBehaviour
     public void PutInTrash()
     {
         actionList.actions.Remove(action);
+        game.myLearning.HasRemovedAction = true;
     }
 }

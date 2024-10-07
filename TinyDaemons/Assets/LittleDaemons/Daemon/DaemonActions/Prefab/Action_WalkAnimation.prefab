@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfd203b171f1c2408eee51e691f3cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextName: '"Walk" Animatic'
+  TextName: Animate "Walk"
   animationState: Walk
   waitForCompletion: 1

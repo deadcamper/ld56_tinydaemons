@@ -26,6 +26,8 @@ public class DaemonBody : MonoBehaviour
             Vector3 random = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             rb.AddForce(random, ForceMode.Impulse);
             gib.transform.parent = parentTransform;
+
+            DaemonGame.GetInstance().myLearning.HasGibletAppeared = true;
         }
 
         Destroy(gameObject);

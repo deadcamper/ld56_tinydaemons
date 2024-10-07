@@ -28,6 +28,7 @@ public class DaemonItemCostButton : MonoBehaviour
         if (game.selectedItemCost == itemCost)
         {
             button.image.color = selectedColor;
+            game.myLearning.HasClickedActionFromStore = true;
             CheckForApplyItem();
         }
         else
@@ -60,6 +61,7 @@ public class DaemonItemCostButton : MonoBehaviour
 
                 game.selectedListForInventory = null;
                 game.selectedItemCost = null;
+                game.myLearning.HasAddedAction = true;
             }
         }
     }

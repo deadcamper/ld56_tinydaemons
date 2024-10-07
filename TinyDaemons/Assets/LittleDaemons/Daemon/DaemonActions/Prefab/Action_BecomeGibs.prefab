@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17aa3e7c89a6bc546819044a36972179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextName: Become Gibs
+  TextName: Become Giblets

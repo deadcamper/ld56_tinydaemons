@@ -12,24 +12,33 @@ public class DaemonAction_PlayAnimation : DaemonAction
     {
         UnityEngine.Animator aa = parentDaemon.body.animator;
 
+        aa.StopPlayback();
         aa.Play(animationState);
+        //aa.
         yield return new WaitForEndOfFrame();
-        while (waitForCompletion)
+        if (waitForCompletion)
         {
-            var curState = aa.GetCurrentAnimatorStateInfo(0);
-
-            if (!curState.IsName(animationState))
+            while (waitForCompletion)
             {
-                break;
-            }
-            if (1 <= curState.normalizedTime)
-            {
-                break;
-            }
+                var curState = aa.GetCurrentAnimatorStateInfo(0);
 
-            yield return new WaitForEndOfFrame();
+                if (!curState.IsName(animationState))
+                {
+                    break;
+                }
+                if (1 <= curState.normalizedTime)
+                {
+                    break;
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
+            aa.StopPlayback();
         }
-        
+        else
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
     }
 
 }

@@ -175,19 +175,34 @@ public class Daemon : MonoBehaviour
             act.NotPerforming();
         }
 
+        StopTheStateMachine();
+
+        activeStateMachine = StartCoroutine(HackyStateMachine());
+    }
+
+    private void StopTheStateMachine()
+    {
         if (activeStateMachine != null)
         {
             StopCoroutine(activeStateMachine);
+            ResetDaemonBody();
+            activeStateMachine = null;
         }
-        body.animator.StopPlayback();
+    }
+
+    private void ResetDaemonBody()
+    {
         GetComponent<Rigidbody>().velocity = Vector3.zero;
-        activeStateMachine = StartCoroutine(HackyStateMachine());
+        body.animator.StopPlayback();
     }
 
     IEnumerator HackyStateMachine()
     {
         while (true)
         {
+            // May as well reset while we're here
+            ResetDaemonBody();
+
             yield return new WaitForEndOfFrame();
 
             // Definitely dead
@@ -324,6 +339,7 @@ public class Daemon : MonoBehaviour
     private void OnMouseUpAsButton()
     {
         game.SelectDaemon(this);
+        game.myLearning.HasClickedDaemon = true;
     }
 
     private void OnMouseEnter()

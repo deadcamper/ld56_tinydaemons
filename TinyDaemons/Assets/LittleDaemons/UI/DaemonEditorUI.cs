@@ -95,7 +95,7 @@ public class DaemonEditorUI : MonoBehaviour
         {
             healthPlate.text = $"Health: {lastDaemon.Health}/{lastDaemon.TotalHealth}";
         }
-        killSwitch.gameObject.SetActive(lastDaemon?.Health > 0);
+        // killSwitch.gameObject.SetActive(lastDaemon?.Health > 0);
 
         targetPlate.text = "";
         if (lastDaemon && lastDaemon.enemy)

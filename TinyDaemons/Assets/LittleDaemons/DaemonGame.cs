@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -5,6 +6,19 @@ using UnityEngine;
 /// </summary>
 public class DaemonGame : MonoBehaviour
 {
+    [Serializable]
+    public class LearningStages
+    {
+        public bool HasClickedDaemon;
+        public bool HasRemovedAction;
+        public bool HasClickedActionFromStore;
+        public bool HasAddedAction;
+        public bool HasGibletAppeared;
+        public bool HasCollectedGiblet;
+    }
+
+    internal LearningStages myLearning = new LearningStages();
+
     public Material defaultHover;
     public DaemonInventory inventory;
 
@@ -68,6 +82,7 @@ public class DaemonGame : MonoBehaviour
             GainItem(prefab);
         }
         */
+        myLearning.HasCollectedGiblet = true;
     }
 
     public bool GainItem(DaemonItem prefab)

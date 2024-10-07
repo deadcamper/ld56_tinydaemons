@@ -157,7 +157,7 @@ MonoBehaviour:
   enemyTypes: 
   enemy: {fileID: 0}
   OnIdle:
-    title: Patrol
+    title: Idle
     isModifiable: 1
     isVisible: 1
     actions:
@@ -175,11 +175,6 @@ MonoBehaviour:
     title: Attack
     isModifiable: 1
     isVisible: 1
-    actions: []
-  OnAttackMelee:
-    title: 
-    isModifiable: 0
-    isVisible: 0
     actions: []
   OnCollision:
     title: Handle Collision

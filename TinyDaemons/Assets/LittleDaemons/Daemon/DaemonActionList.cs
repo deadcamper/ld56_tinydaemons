@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class DaemonActionList
@@ -37,13 +38,20 @@ public class DaemonActionList
         isPerforming = true;
         performingActionIndex = 0;
 
-        List<DaemonAction> tempList = new List<DaemonAction>(actions);
-
-        foreach (DaemonAction action in tempList)
+        if (actions.Count == 0)
         {
-            yield return action.PerformAction(parentDaemon);
-            performingActionIndex++;
+            yield return new WaitForSeconds(0.25f); // add a little wait, so that it glows
         }
+        else
+        {
+            List<DaemonAction> tempList = new List<DaemonAction>(actions);
+            foreach (DaemonAction action in tempList)
+            {
+                yield return action.PerformAction(parentDaemon);
+                performingActionIndex++;
+            }
+        }
+        
         isPerforming = false;
     }
 }
