@@ -94,10 +94,14 @@ public class Daemon : MonoBehaviour
     public enum DaemonType
     {
         None,
-        Player,
+        Doomed,
         Imp,
         Demon,
-        Zombie
+        Zombie,
+
+        // Robo Boxers
+        Red,
+        Blue
     }
 
     public enum InterruptState
@@ -127,24 +131,34 @@ public class Daemon : MonoBehaviour
 
         game = DaemonGame.GetInstance();
 
-        // Just slap it in there
-        if (daemonType == DaemonType.None)
+        if (enemyTypes == null || enemyTypes.Count == 0)
         {
-            enemyTypes = new List<DaemonType>();
-        }
-        else if (daemonType != DaemonType.Player)
-        {
-            enemyTypes = new List<DaemonType> { DaemonType.Player };
-        }
-        else
-        {
-            enemyTypes = System.Enum.GetValues(typeof(DaemonType))
-                .Cast<DaemonType>()
-                .Where(dType => dType != DaemonType.Player && dType != DaemonType.None)
-                .ToList();
+            AutopopulateEnemyTypes();
         }
 
         KickTheStateMachine();
+    }
+
+    private void AutopopulateEnemyTypes()
+    {
+        enemyTypes = new List<DaemonType>();
+
+        // Just slap it in there
+        if (daemonType == DaemonType.None)
+        {
+            // nothing
+        }
+        else if (daemonType == DaemonType.Doomed)
+        {
+            enemyTypes = System.Enum.GetValues(typeof(DaemonType))
+                .Cast<DaemonType>()
+                .Where(dType => dType != DaemonType.Doomed && dType != DaemonType.None)
+                .ToList();
+        }
+        else
+        {
+            enemyTypes.Add(DaemonType.Doomed);
+        }
     }
 
     public void Hurt(int hitpoints)
@@ -187,9 +201,8 @@ public class Daemon : MonoBehaviour
 
             CheckUnhandledInterrupts();
 
-            // TODO Enemy detection bits
+            // TODO 'Hurt' parts
 
-            // TODO Collision Handling bits
             if (DaemonState.HandleCollision == activeState)
             {
                 yield return OnCollision.DoListOfActions(this);

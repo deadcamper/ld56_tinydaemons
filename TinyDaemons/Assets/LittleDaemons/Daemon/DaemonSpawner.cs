@@ -2,21 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Serialization;
 
 public class DaemonSpawner : MonoBehaviour
 {
+    // One of each is required
+    public List<Daemon> essentialDaemons = new List<Daemon>();
     public Daemon playerPrefab;
-    public List<Daemon> prefabDaemons;
+
+    // Side daemons
+    [FormerlySerializedAs("prefabDaemons")]
+    public List<Daemon> sideDaemons;
     public List<SpawnPoint> spawnPoints;
 
+    public float timeToStart = 0f;
     public float timeToCheck = 2.75f;
     public float timeToAct = 0.25f;
 
-    public int maxDaemonCount = 6;
+    [FormerlySerializedAs("maxDaemonCount")]
+    public int maxSideDaemonCount = 6;
 
     private int activeDaemonCount;
 
+    /*
     public enum SpawnDecsion
     {
         DoNothing,
@@ -25,69 +33,91 @@ public class DaemonSpawner : MonoBehaviour
     }
 
     internal SpawnDecsion decision;
+    */
 
     // Start is called before the first frame update
     void Start()
     {
+        if (playerPrefab)
+        {
+            essentialDaemons.Add(playerPrefab);
+        }
         StartCoroutine(CountDownChecker());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private IEnumerator CountDownChecker()
     {
-        yield return new WaitForSeconds(timeToCheck + timeToAct); // Start one round no spawning
+        if (timeToStart > 0f)
+        {
+            yield return new WaitForSeconds(timeToStart); // Added delay
+        }
+        
         int spawnPointIter = 0;
         while (true)
         {
             yield return new WaitForSeconds(timeToCheck);
-            Daemon[] activeDaemons = GameObject.FindObjectsOfType<Daemon>();
 
-            if (!activeDaemons.Any(dem => dem.daemonType == Daemon.DaemonType.Player))
+            Daemon chosenPrefab = EvalNextPrefabToSpawn();
+            SpawnPoint spawnPoint = null;
+
+            if (chosenPrefab != null)
             {
-                decision = SpawnDecsion.SpawnPlayer;
+                spawnPoint = spawnPoints[spawnPointIter];
+                spawnPoint.PrimeToSpawn();
+                spawnPointIter = (1 + spawnPointIter) % spawnPoints.Count;
+
+                yield return new WaitForSeconds(timeToAct);
+
+                spawnPoint.Spawn(chosenPrefab);
             }
-            else if (activeDaemons.Length < maxDaemonCount)
+        }
+    }
+
+    private Daemon EvalNextPrefabToSpawn()
+    {
+        Daemon chosenPrefab = null;
+
+        HashSet<Daemon> activeDaemons = FindObjectsOfType<Daemon>().ToHashSet();
+
+        // Evaluate essential daemons
+        foreach (Daemon essDaemon in essentialDaemons)
+        {
+            Daemon.DaemonType essentialType = essDaemon.daemonType;
+            if (essentialType == Daemon.DaemonType.None)
             {
-                decision = SpawnDecsion.SpawnDaemon;
+                Debug.LogWarning("Treating 'None' type as essential. May want to swap this asap...", essDaemon);
+            }
+
+            Daemon liveDaemon = activeDaemons.Where(act => act.daemonType == essentialType).FirstOrDefault();
+            if (liveDaemon)
+            {
+                activeDaemons.Remove(liveDaemon);
+                continue;
             }
             else
             {
-                decision = SpawnDecsion.DoNothing;
+                // This prefab is missing and we need a new one pronto!
+                chosenPrefab = essDaemon;
+                break;
             }
-
-            Daemon chosenPrefab = null;
-
-            switch (decision)
-            {
-                case SpawnDecsion.DoNothing:
-                    chosenPrefab = null;
-                    break;
-                case SpawnDecsion.SpawnPlayer:
-                    chosenPrefab = playerPrefab;
-                    break;
-                case SpawnDecsion.SpawnDaemon:
-                    int daemonIndex = Random.Range(0, prefabDaemons.Count);
-                    Daemon prefabDaemon = prefabDaemons[daemonIndex];
-                    chosenPrefab = prefabDaemon;
-                    break;
-            }
-
-            SpawnPoint spawnPoint = spawnPoints[spawnPointIter];
-            if (chosenPrefab != null)
-            {
-                spawnPoint.PrimeToSpawn();
-            }
-
-            yield return new WaitForSeconds(timeToAct);
-
-            spawnPoint.Spawn(chosenPrefab);
-
-            spawnPointIter = (1 + spawnPointIter) % spawnPoints.Count;
         }
+
+        // Keep looking?
+        if (chosenPrefab == null && sideDaemons.Count > 0)
+        {
+            // Determine if we need more Daemons after essentials.
+            if (activeDaemons.Count >= maxSideDaemonCount)
+            {
+                chosenPrefab = null;
+            }
+            else
+            {
+                int rngIndex = Random.Range(0, sideDaemons.Count);
+                Daemon prefabDaemon = sideDaemons[rngIndex];
+                chosenPrefab = prefabDaemon;
+            }
+        }
+
+        return chosenPrefab;
     }
 }

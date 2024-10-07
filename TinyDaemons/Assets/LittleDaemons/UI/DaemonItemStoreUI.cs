@@ -34,6 +34,6 @@ public class DaemonItemStoreUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gibletCounter.text = $"Giblets: {game.gibletPoints}";
+        gibletCounter.text = $"Giblets: Rank {game.gibletPoints}";
     }
 }
