@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DaemonSpawner : MonoBehaviour
 {
     public Daemon playerPrefab;
     public List<Daemon> prefabDaemons;
-    public List<Transform> spawnPoints;
+    public List<SpawnPoint> spawnPoints;
 
     public float timeToCheck = 2.75f;
     public float timeToAct = 0.25f;
@@ -59,32 +60,32 @@ public class DaemonSpawner : MonoBehaviour
                 decision = SpawnDecsion.DoNothing;
             }
 
-            yield return new WaitForSeconds(timeToAct);
+            Daemon chosenPrefab = null;
 
-            Transform spawnPoint = spawnPoints[spawnPointIter];
-            Vector3 position = spawnPoint.position;
-            Quaternion rotation = spawnPoint.rotation;
-
-            Daemon newDaemon = null;
-            switch(decision)
+            switch (decision)
             {
                 case SpawnDecsion.DoNothing:
+                    chosenPrefab = null;
                     break;
                 case SpawnDecsion.SpawnPlayer:
-                    newDaemon = Instantiate(playerPrefab, position, playerPrefab.transform.rotation);
+                    chosenPrefab = playerPrefab;
                     break;
                 case SpawnDecsion.SpawnDaemon:
                     int daemonIndex = Random.Range(0, prefabDaemons.Count);
                     Daemon prefabDaemon = prefabDaemons[daemonIndex];
-                    newDaemon = Instantiate(prefabDaemon, position, prefabDaemon.transform.rotation);
+                    chosenPrefab = prefabDaemon;
                     break;
             }
 
-            // We rotate the body afterward
-            if (newDaemon)
+            SpawnPoint spawnPoint = spawnPoints[spawnPointIter];
+            if (chosenPrefab != null)
             {
-                newDaemon.body.transform.rotation = rotation;
+                spawnPoint.PrimeToSpawn();
             }
+
+            yield return new WaitForSeconds(timeToAct);
+
+            spawnPoint.Spawn(chosenPrefab);
 
             spawnPointIter = (1 + spawnPointIter) % spawnPoints.Count;
         }

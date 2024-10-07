@@ -54,11 +54,14 @@ public class DaemonItemButton : MonoBehaviour
         {
             if (game.selectedListForInventory != null)
             {
+                // TODO - Commented out for desire of a store instead
+                /*
                 if (!game.inventory.items.Remove(item))
                 {
                     Debug.LogWarning("Tried to ApplyItem for an item that's not in the inventory.");
                     return;
                 }
+                */
 
                 item.ApplyItem();
 
@@ -80,6 +83,7 @@ public class DaemonItemButton : MonoBehaviour
         }
     }
 
+    // Unused
     private void TossItemToTrash()
     {
         game.inventory.items.Remove(item);

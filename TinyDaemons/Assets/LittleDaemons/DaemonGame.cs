@@ -8,13 +8,18 @@ public class DaemonGame : MonoBehaviour
     public Material defaultHover;
     public DaemonInventory inventory;
 
-    public DaemonInventory itemStore;
+    public DaemonItemStore itemStore;
 
+    public DaemonSpawner spawner;
     public Daemon selectedDaemon { get; private set; }
 
     internal DaemonActionList selectedListForInventory;
 
     internal DaemonItem selectedItem;
+
+    internal DaemonItemCost selectedItemCost;
+
+    public int gibletPoints { get; private set; }
 
 
     private static DaemonGame _singleton;
@@ -55,11 +60,14 @@ public class DaemonGame : MonoBehaviour
 
     public void OnPickupGib()
     {
+        gibletPoints++;
+        /*
         DaemonItem prefab = itemStore.RandomItem();
         if (prefab)
         {
             GainItem(prefab);
         }
+        */
     }
 
     public bool GainItem(DaemonItem prefab)

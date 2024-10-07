@@ -289,7 +289,15 @@ public class Daemon : MonoBehaviour
                     Interrupt(InterruptState.CollidedWithWall);
                     break;
                 case "Daemon":
-                    Interrupt(InterruptState.CollidedWithDaemon);
+                    Daemon d = collision.collider.GetComponent<Daemon>();
+                    if( enemyTypes.Contains(d.daemonType) )
+                    {
+                        Interrupt(InterruptState.CollidedWithEnemy);
+                    }
+                    else
+                    {
+                        Interrupt(InterruptState.CollidedWithDaemon);
+                    }    
                     break;
 
                 // TODO Enemy is different?

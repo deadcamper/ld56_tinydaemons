@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DaemonAction_BackAwayFromWall : DaemonAction
 {
-    public string animation = "Idle";
+    public string backawayAnimation = "Idle";
 
     public float distance = 1;
 
@@ -12,7 +12,7 @@ public class DaemonAction_BackAwayFromWall : DaemonAction
     protected override IEnumerator InternalAction(Daemon parentDaemon)
     {
         UnityEngine.Animator aa = parentDaemon.body.animator;
-        aa.Play(animation);
+        aa.Play(backawayAnimation);
 
         Collider bump = parentDaemon.lastBumped;
         Vector3 impulse = parentDaemon.lastBumpedImpulse;

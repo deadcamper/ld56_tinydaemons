@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DaemonActionListUI : MonoBehaviour
@@ -9,7 +10,8 @@ public class DaemonActionListUI : MonoBehaviour
     public TextMeshProUGUI titleField;
     public DaemonActionUI templateAction;
 
-    public Button addFromInventory;
+    [FormerlySerializedAs("addFromInventory")]
+    public Button addAction;
 
     public Color shoppingColor = Color.green;
     public Color performingColor = Color.yellow;
@@ -26,7 +28,7 @@ public class DaemonActionListUI : MonoBehaviour
         templateAction.gameObject.SetActive(false);
         game = DaemonGame.GetInstance();
 
-        addFromInventory.onClick.AddListener(PrimeToAddFromInventory);
+        addAction.onClick.AddListener(PrimeToAddFromInventory);
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class DaemonActionListUI : MonoBehaviour
         if (list == null)
             return;
 
-        addFromInventory.gameObject.SetActive(game.selectedItem);
+        addAction.gameObject.SetActive(game.selectedItem || game.selectedItemCost != null);
 
         titleBackplate.color = (game.selectedListForInventory == list) ? shoppingColor :
             ( list.IsPerforming() ? performingColor : notPerformingColor);

@@ -10,6 +10,7 @@ public class DaemonActionUI : MonoBehaviour
     public TMPro.TextMeshProUGUI text;
 
     public Button putInInventoryButton;
+    public Button putInTrashButton;
 
     private DaemonActionList actionList;
     private DaemonAction action;
@@ -21,6 +22,7 @@ public class DaemonActionUI : MonoBehaviour
         text.text = daemonAction.TextName;
 
         putInInventoryButton.onClick.AddListener(PutInInventory);
+        putInTrashButton.onClick.AddListener(PutInTrash);
     }
 
     public void SetPerforming(bool IsPerforming)
@@ -47,9 +49,13 @@ public class DaemonActionUI : MonoBehaviour
         GameObject empty = new GameObject();
         DaemonItem_GainAction gain = empty.AddComponent<DaemonItem_GainAction>();
         gain.gainedAction = action;
+        game.GainItem(gain);
 
         actionList.actions.Remove(action);
+    }
 
-        game.GainItem(gain);
+    public void PutInTrash()
+    {
+        actionList.actions.Remove(action);
     }
 }
