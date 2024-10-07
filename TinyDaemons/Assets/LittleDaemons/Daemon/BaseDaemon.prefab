@@ -170,6 +170,7 @@ MonoBehaviour:
     isVisible: 1
     actions:
     - {fileID: -4048101259246730823, guid: 1615da9451720e04fa790577b7553240, type: 3}
+    - {fileID: -3321762381174704686, guid: 9e79e703b219c6945a6fea96d4d2374d, type: 3}
   OnAttack:
     title: Attack
     isModifiable: 1

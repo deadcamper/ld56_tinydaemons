@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 506690794359894304}
   - component: {fileID: -3321762381174704686}
   m_Layer: 0
-  m_Name: Action_StartPatrolling
+  m_Name: Action_SwitchToHunt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce82c8f988d0beb44afc794ee27e53d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TextName: Switch To Hunting
   newState: 1

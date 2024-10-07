@@ -52,9 +52,6 @@ public class Daemon : MonoBehaviour
 
     public DaemonActionList OnAttack;
 
-    // TODO - Remove?
-    public DaemonActionList OnAttackMelee;
-
     [FormerlySerializedAs("OnCollision2")]
     public DaemonActionList OnCollision;
 
@@ -70,7 +67,6 @@ public class Daemon : MonoBehaviour
                 OnIdle,
                 OnHuntingEnemy,
                 OnAttack,
-                OnAttackMelee,
                 OnCollision,
                 OnHurt,
                 OnDie
@@ -158,13 +154,10 @@ public class Daemon : MonoBehaviour
     private void KickTheStateMachine()
     {
         // Do clear-ups of machines
-        OnIdle.NotPerforming();
-        OnHuntingEnemy.NotPerforming();
-        OnAttack.NotPerforming();
-        OnAttackMelee.NotPerforming();
-        OnCollision.NotPerforming();
-        OnHurt.NotPerforming();
-        OnDie.NotPerforming();
+        foreach (var act in AllActions)
+        {
+            act.NotPerforming();
+        }
 
         if (activeStateMachine != null)
         {
@@ -203,7 +196,12 @@ public class Daemon : MonoBehaviour
                     activeState = DaemonState.Idle;
                 }
             }
-
+            else if (DaemonState.Attacking == activeState)
+            {
+                // TODO - Check range for melee or not ? Nah...
+                yield return OnAttack.DoListOfActions(this);
+                activeState = enemy == null ? DaemonState.Idle : DaemonState.Hunting;
+            }
             else if (DaemonState.Hunting == activeState)
             {
                 if (!enemy || enemy.Health <= 0)

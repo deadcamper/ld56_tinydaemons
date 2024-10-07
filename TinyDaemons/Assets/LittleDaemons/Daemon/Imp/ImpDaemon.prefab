@@ -102,6 +102,14 @@ PrefabInstance:
       propertyPath: daemonType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: OnAttack.actions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6078376342512077636, guid: 82aefa372ebf498468915a3508210540, type: 3}
+      propertyPath: OnAttack.actions.Array.data[0]
+      value: 
+      objectReference: {fileID: -8796166039956139068, guid: 72fa0c60ef4fda644945ff0e0506b0a4, type: 3}
     - target: {fileID: 9010324527898670575, guid: 82aefa372ebf498468915a3508210540, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
