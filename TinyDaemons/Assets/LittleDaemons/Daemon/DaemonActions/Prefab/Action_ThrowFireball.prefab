@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1884abedc664c6e4ba0c1a052b80f84d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextName: Throw
+  TextName: Throw Fireball
   fireballTemplate: {fileID: 5983517805051055444, guid: 22cae8aac3e9e0846b1e0a99bd7a6b15, type: 3}
   throwAnimation: AttackThrow

@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce82c8f988d0beb44afc794ee27e53d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextName: Switch To Hunting
+  TextName: Switch To Hunt
   newState: 1

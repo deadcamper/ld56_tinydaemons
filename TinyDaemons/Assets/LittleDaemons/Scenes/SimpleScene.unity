@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 146938603}
   - component: {fileID: 146938602}
   - component: {fileID: 146938605}
+  - component: {fileID: 146938606}
   m_Layer: 5
   m_Name: ItemButton
   m_TagString: Untagged
@@ -541,6 +542,26 @@ MonoBehaviour:
   itemCost:
     action: {fileID: 0}
     cost: 0
+--- !u!114 &146938606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146938599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 65.3
+  m_MinHeight: -1
+  m_PreferredWidth: 65.3
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &151356155
 GameObject:
   m_ObjectHideFlags: 0
@@ -5318,18 +5339,28 @@ MonoBehaviour:
   itemCosts:
   - action: {fileID: -8550268869023080706, guid: 878216fc8b155b34f83572d04adad10a, type: 3}
     cost: 0
-  - action: {fileID: -8720406612950830258, guid: 1ede07b840a9e7949ad4d2acbb16c74b, type: 3}
-    cost: 1
-  - action: {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
-    cost: 1
   - action: {fileID: -6413093103160641786, guid: 92604a617d1ba7247903610cc6752e5b, type: 3}
+    cost: 1
+  - action: {fileID: -6413093103160641786, guid: 39f8ed610d510a04fb6d4d361da6f347, type: 3}
+    cost: 1
+  - action: {fileID: -8720406612950830258, guid: 1ede07b840a9e7949ad4d2acbb16c74b, type: 3}
     cost: 2
+  - action: {fileID: -8720406612950830258, guid: 1972dcc53d6fcad45b4715d8ecc76cd7, type: 3}
+    cost: 2
+  - action: {fileID: 4801741166048597290, guid: 04370957ccccce54da6379b2af668828, type: 3}
+    cost: 5
+  - action: {fileID: -6275822870012875990, guid: e1a9325067b12ee41adede811202934f, type: 3}
+    cost: 5
   - action: {fileID: -5264599584180289776, guid: a0d212c0b6a0c7a4686a75d31af97ed0, type: 3}
-    cost: 3
+    cost: 6
+  - action: {fileID: -3321762381174704686, guid: 174852496d5bff84f980abd1c37895ba, type: 3}
+    cost: 8
   - action: {fileID: -4048101259246730823, guid: 1615da9451720e04fa790577b7553240, type: 3}
-    cost: 5
+    cost: 10
   - action: {fileID: -3321762381174704686, guid: 9e79e703b219c6945a6fea96d4d2374d, type: 3}
-    cost: 5
+    cost: 12
+  - action: {fileID: -8796166039956139068, guid: 72fa0c60ef4fda644945ff0e0506b0a4, type: 3}
+    cost: 25
 --- !u!1 &1038422286
 GameObject:
   m_ObjectHideFlags: 0
@@ -5853,7 +5884,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -446.7, y: 90}
+  m_SizeDelta: {x: 0, y: 90}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1116568257
 MonoBehaviour:
@@ -5862,7 +5893,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116568255}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
@@ -9729,7 +9760,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
