@@ -140,8 +140,6 @@ MonoBehaviour:
     cost: 5
   - action: {fileID: -5264599584180289776, guid: a0d212c0b6a0c7a4686a75d31af97ed0, type: 3}
     cost: 6
-  - action: {fileID: -3321762381174704686, guid: 174852496d5bff84f980abd1c37895ba, type: 3}
-    cost: 8
   - action: {fileID: -4048101259246730823, guid: 1615da9451720e04fa790577b7553240, type: 3}
     cost: 10
   - action: {fileID: -4146895062526136466, guid: ecb2c89bab9fc144abc7dc976c56e298, type: 3}

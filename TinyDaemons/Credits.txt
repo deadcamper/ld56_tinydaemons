@@ -1,2 +1,9 @@
-Borrowed code from here:
+Game made for Ludum Dare 56 within 72 hours.
+
+The theme was "Tiny Creatures"
+
+Made by DavidsHeadGames, solo
+https://davidsheadgames.itch.io/
+
+Borrowed code from here, but ended up never using it:
 https://discussions.unity.com/t/interaction-with-objects-displayed-on-render-texture/691499/2
