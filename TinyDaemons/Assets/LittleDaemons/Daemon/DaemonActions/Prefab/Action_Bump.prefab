@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextName: Back Away
-  animation: Idle
-  distance: 2
+  backawayAnimation: Idle
+  distance: 1
   impulseSpeed: 1.5

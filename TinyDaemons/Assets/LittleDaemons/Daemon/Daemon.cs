@@ -193,6 +193,7 @@ public class Daemon : MonoBehaviour
     private void ResetDaemonBody()
     {
         GetComponent<Rigidbody>().velocity = Vector3.zero;
+        body.animator.Play("None");
         body.animator.StopPlayback();
     }
 
