@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/LittleDaemons/Scenes/SimpleScene.unity
+    path: Assets/LittleDaemons/Scenes/MenuScene.unity
+    guid: 94af7a62471390a47aaf9e867d1b635c
+  - enabled: 1
+    path: Assets/LittleDaemons/Scenes/DoomedScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/LittleDaemons/Scenes/RoboDemoScene.unity
+    guid: 491aaefc9b4e26649b040270536c1009
   m_configObjects: {}

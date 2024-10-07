@@ -78,7 +78,13 @@ public class DaemonEditorUI : MonoBehaviour
         }
         else
         {
-         //   activeListUIs.ForEach(listUI => listUI.Clean());
+            // Add three 'blanks'
+            while (activeListUIs.Count < 3)
+            {
+                var listUI = Instantiate(templateListUI, templateListUI.transform.parent);
+                listUI.gameObject.SetActive(true);
+                activeListUIs.Add(listUI);
+            }
         }
         
     }
